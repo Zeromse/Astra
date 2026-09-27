@@ -1,0 +1,7 @@
+{
+  "name": "astra-celestial-atlas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "星序 ASTRA — 基于古典天文图版的交互式天文图鉴",
+  "scripts": { "start": "node server.cjs", "dev": "node server.cjs", "build": "node build.cjs" }
+}

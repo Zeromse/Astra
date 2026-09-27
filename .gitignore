@@ -1,0 +1,4 @@
+dist/
+preview*.log
+node_modules/
+.qa/

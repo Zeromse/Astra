@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#11130f">
+  <meta name="description" content="星序 ASTRA — 从三幅古典天文图版出发，亲手探索月相、行星轨道与四季的变化。">
+  <title>星序 ASTRA · 交互天文图鉴</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./diagrams.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳转至正文</a>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="星序 ASTRA 首页">
+      <svg viewBox="0 0 48 48" class="brand-symbol" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="24" cy="24" r="9"/><circle cx="24" cy="24" r="16" stroke-width=".5"/><path d="M24 0v13m0 22v13M0 24h13m22 0h13M7 7l10 10m14 14 10 10M7 41l10-10M31 17 41 7"/><path d="m24 8 3 12 13 4-13 4-3 12-3-12-13-4 13-4Z" fill="currentColor" stroke="none"/></g></svg>
+      <span class="brand-name">ASTRA<span>星 序 · 天 文 图 鉴</span></span>
+    </a>
+    <nav class="desktop-nav" aria-label="主导航">
+      <a href="#main" class="nav-link active">探索首页</a>
+      <a href="#observatory" class="nav-link">交互观测室</a>
+      <a href="#collection" class="nav-link">天文图版馆</a>
+      <a href="#about" class="nav-link">关于星序</a>
+    </nav>
+    <button class="collection-link" id="my-collection"><span aria-hidden="true">☆</span> 我的收藏 <span id="saved-count" class="count">0</span></button>
+    <button class="menu-toggle" aria-label="打开导航" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span></button>
+  </header>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="移动端导航" hidden><a href="#main">探索首页</a><a href="#observatory">交互观测室</a><a href="#collection">天文图版馆</a><a href="#about">关于星序</a></nav>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="tiny-star">✦</span> A FIELD GUIDE TO THE COSMOS</div>
+        <h1 id="hero-title">仰望星辰，<br>探寻<span>万象之序。</span></h1>
+        <p class="hero-english">The universe, beautifully in motion.</p>
+        <p class="hero-description">从月的盈亏，到行星的轨迹。<br>翻开古老的天文图谱，用指尖探索星空的运行之美。</p>
+        <div class="hero-actions"><a class="button primary" href="#observatory">开启探索 <span aria-hidden="true">↗</span></a><button class="text-button" id="hero-moon"><span class="play-icon" aria-hidden="true">▷</span> 看月亮如何变化</button></div>
+        <div class="hero-facts"><div><strong>03</strong><span>经典天文图版</span></div><i></i><div><strong>08</strong><span>月相观测节点</span></div><i></i><div><strong class="infinity">∞</strong><span>关于星空的好奇</span></div></div>
+      </div>
+      <div class="hero-visual">
+        <div class="plate-label">FIG. 01 <span>THE CELESTIAL ORDER</span></div>
+        <div id="hero-chart" class="hero-chart" aria-label="可点选的行星轨道图"></div>
+        <div class="planet-note" id="hero-planet-note" aria-live="polite"><span class="planet-note-dot"></span><div><span class="mini-label" id="hero-planet-en">EARTH · 03</span><h2 id="hero-planet-name">地球 <span>我们所在的蓝色星球</span></h2></div><span class="note-cross">↗</span></div>
+        <div class="chart-instruction"><span class="status-dot"></span> 点选行星，循轨探索 <span>✧</span></div>
+      </div>
+    </section>
+    <div class="hero-bottom wrap"><span>献给每一个，曾为星空驻足的人。</span><a href="#observatory">SCROLL TO DISCOVER <span>↓</span></a><span class="bottom-coordinate">CELESTIAL ARCHIVE <b>✦</b> VOL. 01</span></div>
+
+    <section class="observatory section wrap" id="observatory" aria-labelledby="observatory-title">
+      <div class="section-heading"><div><p class="eyebrow">01 <span class="small-rule"></span> INTERACTIVE OBSERVATORY</p><h2 id="observatory-title">让图谱里的宇宙，<em>动起来。</em></h2></div><p class="section-aside">慢一点观察，多一点发现。<br>每一次变化，都有迹可循。</p></div>
+      <div class="observatory-tabs" role="tablist" aria-label="观测主题"><button role="tab" id="tab-moon" aria-controls="panel-moon" aria-selected="true" data-tab="moon"><span>◐</span> 月相演变 <small>PHASES OF THE MOON</small></button><button role="tab" id="tab-orbits" aria-controls="panel-orbits" aria-selected="false" tabindex="-1" data-tab="orbits"><span>◎</span> 行星轨道 <small>PLANETARY ORBITS</small></button><button role="tab" id="tab-seasons" aria-controls="panel-seasons" aria-selected="false" tabindex="-1" data-tab="seasons"><span>✳</span> 四季更替 <small>THE FOUR SEASONS</small></button></div>
+      <div id="panel-moon" role="tabpanel" aria-labelledby="tab-moon" class="experiment-panel">
+        <div class="moon-stage"><span class="stage-fig">FIG. 02 / LUNAR STUDY</span><div class="moon-orbit-decoration" aria-hidden="true"></div><span class="moon-orbit-top">THE CHANGING FACE OF THE MOON</span><div id="large-moon"></div><div class="moon-stage-label"><span id="stage-phase">盈凸月</span><small id="stage-phase-en">WAXING GIBBOUS</small></div><span class="stage-footnote">北半球视角 · 示意图</span><span class="stage-star" aria-hidden="true">✧</span></div>
+        <div class="experiment-content"><div class="mini-label">LUNAR CYCLE <span class="live-label">交互演示</span></div><h3>一轮盈亏，一次重逢。</h3><p>月亮始终有一半被太阳照亮。随着它绕地球运行，我们看见的明亮部分不断变化，于是有了月相。</p><div class="moon-metrics"><div><span>当前月相</span><strong id="phase-name">盈凸月</strong></div><div><span>受光比例</span><strong><span id="illumination">76.4</span><small>%</small></strong></div><div><span>示意月龄</span><strong><span id="moon-age">10.0</span><small>天</small></strong></div></div><div class="slider-title"><label for="moon-day">拖动时间，观察月相</label><button class="small-button" id="moon-play" aria-pressed="false"><span aria-hidden="true">▷</span> 自动演示</button></div><input type="range" id="moon-day" min="0" max="29.53" step="0.01" value="10" aria-label="月龄，单位天"><div class="range-labels"><span>新月 · 0 天</span><span>满月 · 14.8 天</span><span>新月 · 29.5 天</span></div><div id="phase-presets" class="phase-presets" aria-label="选择月相"></div><div class="panel-note"><span>ⓘ</span><p>一个朔望月约为 29.53 天。此处为月相原理演示，不代表实时观测。</p></div></div>
+      </div>
+      <div id="panel-orbits" role="tabpanel" aria-labelledby="tab-orbits" class="experiment-panel" hidden><div class="orbit-stage"><span class="stage-fig">FIG. 03 / PLANETARY STUDY</span><div id="detail-orbit-chart"></div></div><div class="experiment-content"><div class="mini-label">PLANETARY MOTION <span class="live-label">点选探索</span></div><h3>各循其轨，共赴星河。</h3><p>古典图版以交叠的曲线描绘天体的运行。在这张示意图中，选择一颗行星，辨认属于它的轨迹。</p><div class="planet-picker" id="planet-picker" aria-label="选择行星"></div><div class="selected-planet" aria-live="polite"><span class="mini-label" id="selected-planet-en">EARTH</span><h4 id="selected-planet-name">地球</h4><p id="selected-planet-description"></p></div><div class="panel-note"><span>ⓘ</span><p>轨道为艺术化示意；行星大小、距离与位置未按实际比例绘制。</p></div></div></div>
+      <div id="panel-seasons" role="tabpanel" aria-labelledby="tab-seasons" class="experiment-panel" hidden><div class="season-stage"><span class="stage-fig">FIG. 04 / A JOURNEY AROUND THE SUN</span><div id="seasons-chart"></div><span class="stage-footnote">北半球四季 · 示意图</span></div><div class="experiment-content"><div class="mini-label">THE FOUR SEASONS <span class="live-label">循季探索</span></div><h3>公转之间，四季流转。</h3><p>地球带着倾斜的自转轴绕太阳运行。随着公转位置变化，南北半球获得的日照不同，季节由此更替。</p><div class="season-picker" aria-label="选择北半球季节"><button class="active" data-season="0" aria-pressed="true">春分 <small>SPRING</small></button><button data-season="1" aria-pressed="false">夏至 <small>SUMMER</small></button><button data-season="2" aria-pressed="false">秋分 <small>AUTUMN</small></button><button data-season="3" aria-pressed="false">冬至 <small>WINTER</small></button></div><div class="selected-season" aria-live="polite"><span class="mini-label" id="season-en">VERNAL EQUINOX</span><h4 id="season-title">春分 · 昼夜相近</h4><p id="season-description">阳光直射赤道附近，全球大部分地区的白昼与黑夜长度接近。</p></div><div class="panel-note"><span>ⓘ</span><p>这里采用北半球季节名称；南半球的季节与之相反。</p></div></div></div>
+    </section>
+
+    <section class="collection section wrap" id="collection" aria-labelledby="collection-title"><div class="section-heading"><div><p class="eyebrow">02 <span class="small-rule"></span> THE CELESTIAL COLLECTION</p><h2 id="collection-title">纸上的星空，<em>永恒的好奇。</em></h2></div><span class="collection-total">THREE PLATES. ONE UNIVERSE.</span></div><div class="collection-toolbar"><div class="filter-group" aria-label="筛选图版"><button class="active" data-filter="all" aria-pressed="true">全部图版 <span>03</span></button><button data-filter="moon" aria-pressed="false">月相研究</button><button data-filter="orbits" aria-pressed="false">行星运行</button><button data-filter="atlas" aria-pressed="false">天文图集</button><button data-filter="saved" aria-pressed="false">我的收藏</button></div><span class="gallery-hint">点击图版，展开细节 <span>↗</span></span></div><div class="gallery-grid" id="gallery-grid"></div><div class="empty-state" id="empty-state" hidden><span>☆</span><h3>把喜欢的星空，留在这里。</h3><p>点击图版上的星标，即可加入你的收藏。</p><button class="button secondary" id="reset-filter">浏览全部图版 <span>↗</span></button></div></section>
+
+    <section class="about wrap" id="about"><span class="about-ornament" aria-hidden="true">✧</span><p class="eyebrow">THE ART OF LOOKING UP</p><h2>星空从未遥远，好奇便是起点。</h2><p>星序以三幅古典天文图版为线索，将纸上的月相、轨道与四季转化为可以触碰的探索。<br>在细密的线条与缓慢的运行之间，重新发现仰望的乐趣。</p><button class="text-button" id="about-open">关于这些图版 <span aria-hidden="true">↗</span></button><span class="about-coordinates" aria-hidden="true">SOL · LUNA · TERRA</span></section>
+  </main>
+  <footer class="site-footer wrap"><a class="footer-brand" href="#main">✦ <span>ASTRA</span> 星序</a><p>以古典图谱为起点，向无限星空致意。</p><a href="#main">回到星空 <span>↑</span></a></footer>
+
+  <dialog id="plate-dialog" class="plate-dialog" aria-labelledby="dialog-title"><div class="dialog-topbar"><span class="mini-label" id="dialog-index">PLATE I</span><div><button id="zoom-toggle" class="icon-button" aria-label="放大图版" title="放大图版">⊕</button><button id="dialog-close" class="icon-button" aria-label="关闭图版">×</button></div></div><div class="dialog-layout"><div class="dialog-image-wrap" id="dialog-image-wrap"><img id="dialog-image" alt=""></div><div class="dialog-info"><span class="eyebrow" id="dialog-en"></span><h2 id="dialog-title"></h2><p id="dialog-description"></p><div id="dialog-topics" class="dialog-topics"></div><p class="source-note">图像来源：你提供的参考图版。<br>原作者与出版年代未确认。</p><button id="dialog-save" class="button secondary">☆ 收藏图版</button><div class="dialog-pagination"><button id="previous-plate" aria-label="上一张图版">←</button><span id="dialog-page">01 / 03</span><button id="next-plate" aria-label="下一张图版">→</button></div></div></div></dialog>
+  <dialog id="about-dialog" class="about-dialog" aria-labelledby="about-dialog-title"><button class="icon-button" id="about-close" aria-label="关闭说明">×</button><p class="eyebrow">ABOUT THIS ATLAS</p><h2 id="about-dialog-title">从图版，走向理解。</h2><p>本网站的视觉与内容来自三张参考图片：月相图、行星轨道图，以及包含四季、月相和星座的天文图集。保留原图供浏览，不推断其具体作者与年代。</p><p>交互图形是对图版主题的现代化解释。轨道、大小与位置均作示意；月相亮面采用简化几何模型，不用于观测预报。</p><h3>延伸阅读</h3><a href="https://science.nasa.gov/moon/moon-phases/" target="_blank" rel="noopener noreferrer">NASA · 月相的形成 <span>↗</span></a><a href="https://science.nasa.gov/solar-system/planets/" target="_blank" rel="noopener noreferrer">NASA · 探索太阳系 <span>↗</span></a><a href="https://spaceplace.nasa.gov/seasons/en/" target="_blank" rel="noopener noreferrer">NASA · 四季从何而来 <span>↗</span></a></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
